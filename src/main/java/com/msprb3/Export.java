@@ -17,9 +17,17 @@ public class Export {
             FileWriter fichierIndexEcriture = new FileWriter(fichierIndex.getAbsoluteFile());
             BufferedWriter bufferIndex = new BufferedWriter(fichierIndexEcriture);
 
+            bufferIndex.write("<!DOCTYPE html>\n "+
+                    "<html lang='en'>\n"+
+                    "<head>\n <title>MSPR - JAVA</title>\n" +
+                    "<meta charset='utf-8'>\n "+
+                    "<link rel='stylesheet' href='style/accueil.css'>\n"+
+                    " </head>\n "+
+                    "<img class='Logo' src='annexes/images/LogoGOSecuri.jpg' alt='Logo GOSecuri'>\n"+
+                    "<h1>MSPR - JAVA Accueil</h1>\n"+
+                    "<body>\n"+
+                    "<div class='List'>\n");
 
-            bufferIndex.write("<!DOCTYPE html>\n");
-            bufferIndex.write("<html lang=\"en\">\n<body>\n<h1>Accueil !</h1>");
 
             lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));
 
@@ -28,7 +36,10 @@ public class Export {
             }
 
 
-            bufferIndex.write("</body></html>");
+            bufferIndex.write("</div>\n"+
+                    "</body>\n"+
+                    "<footer>\n MSPR - JAVA Â© 2021 Copyright\n</footer>\n"+
+                    "</html>");
             bufferIndex.close();
 
         }
