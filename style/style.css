@@ -1,0 +1,49 @@
+* {
+    margin: 5px;
+    padding: 5px;
+    font: inherit;
+    vertical-align: baseline;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: white;
+    font-family: "Roboto Light";
+    font-size: 150%;
+}
+h1 {
+    font-size: 250%;
+    color: #379EC1;
+    text-align: center;
+}
+a:link {
+    color: #379EC1;
+}
+a:visited {
+    color: #659224;
+}
+a:hover {
+    color: #000000;
+}
+footer{
+    position:absolute;
+    bottom:0;
+    width:90%;
+    color: #379EC1;
+}
+div.List {
+    position: center;
+    text-align: center;
+}
+footer {
+    text-align: right;
+}
+.Logo {
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    border: white;
+    border-image: none;
+}
