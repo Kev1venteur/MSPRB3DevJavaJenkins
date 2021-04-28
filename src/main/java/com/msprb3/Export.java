@@ -69,7 +69,7 @@ public class Export {
                 bw.write("<head>\n " +
                         "<title>"+personne+"</title>\n"+
                         "<meta charset='utf-8'>\n"+
-                        "<link rel='stylesheet' href='../style/style2.css'>\n"+
+                        "<link rel='stylesheet' href='../style/agent.css'>\n"+
                         "</head>\n");
                 bw.write("<div class='Bouton'><button class='favorite styled' type='button'>Identification</button>\n</div>\n");
                 bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='../fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
