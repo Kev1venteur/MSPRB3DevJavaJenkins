@@ -30,7 +30,7 @@ $ java -jar MSPRB3Dev.jar
 ```
 
 ## Environnement Setup
-:pushpin: Here we installed Jenkins from LXC Container on proxmox : </br>
+:pushpin: Here we installed Jenkins from LXC Container on proxmox : </br></br>
 ![Proxmox Tree Screenshot](annexes/screenshots/proxmox1.png) </br>
 ![Proxmox LXC Jenkins Screenshot](annexes/screenshots/proxmox2.png)
 
