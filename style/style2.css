@@ -1,0 +1,62 @@
+* {
+    margin: 5px;
+    padding: 5px;
+    font: inherit;
+    vertical-align: baseline;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: white;
+    font-family: "Roboto Light";
+    font-size: 150%;
+    text-align: center;
+}
+h1 {
+    font-size: 250%;
+    color: #379EC1;
+    text-align: center;
+}
+footer{
+    position:absolute;
+    bottom:0;
+    width:90%;
+    color: #379EC1;
+    text-align: right;
+}
+.Bouton {
+    text-align: left;
+}
+.styled {
+    margin: 10px;
+    border: 0;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgba(220, 0, 0, 1);
+    background-image: linear-gradient(to top left,
+    rgba(0, 0, 0, .2),
+    rgba(0, 0, 0, .2) 30%,
+    rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+    inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+.styled:hover {
+    background-color: rgba(255, 0, 0, 1);
+}
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+    inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+.ImageIdentite {
+    text-align: right;
+    margin-right: 50px;
+}
+.Imageprofile {
+    text-align: right;
+}

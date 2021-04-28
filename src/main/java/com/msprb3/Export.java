@@ -1,32 +1,36 @@
-package src.main.java.com.msprb3;
+package com.msprb3;
 
 import java.io.*;
 
 public class Export {
     public static void genererAccueil() throws IOException {
         BufferedReader lecture;
-        String ligne;
+        String ligne1;
 
         try{
+            File fichierIndex = new File("index.html");
 
-            File fichier = new File("index.html");
-
-            if(!fichier.exists()){
-                fichier.createNewFile();
+            if(!fichierIndex.exists()){
+                fichierIndex.createNewFile();
             }
 
-            FileWriter fichierEcriture = new FileWriter(fichier.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fichierEcriture);
+            FileWriter fichierIndexEcriture = new FileWriter(fichierIndex.getAbsoluteFile());
+            BufferedWriter bufferIndex = new BufferedWriter(fichierIndexEcriture);
 
-            bw.write("<!DOCTYPE html>\n");
-            bw.write("<html lang=\"en\">\n<body>\n<h1>Accueil !</h1>");
+
+            bufferIndex.write("<!DOCTYPE html>\n");
+            bufferIndex.write("<html lang=\"en\">\n<body>\n<h1>Accueil !</h1>");
 
             lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));
 
-            while ((ligne = lecture.readLine()) != null)
-                bw.write("<a href='agents/"+ligne+".html'>"+ligne+"</a><br>");
-            lecture.close();
-            bw.write("</body></html>");
+            while ((ligne1 = lecture.readLine()) != null){
+                bufferIndex.write("<a href='agents/"+ligne1+".html'>"+ligne1+"</a><br>\n");
+            }
+
+
+            bufferIndex.write("</body></html>");
+            bufferIndex.close();
+
         }
         catch (FileNotFoundException exc){
             System.out.println("Erreur !");
@@ -61,13 +65,43 @@ public class Export {
                 BufferedWriter bw = new BufferedWriter(fichierEcriture);
 
                 bw.write("<!DOCTYPE html>\n");
-                bw.write("<html lang=\"en\">\n" + "<body>\n" + "<h1>"+personne+"</h1>\n");
-
+                bw.write("<html lang='fr'>\n");
+                bw.write("<head>\n " +
+                        "<title>"+personne+"</title>\n"+
+                        "<meta charset='utf-8'>\n"+
+                        "<link rel='stylesheet' href='../style/style2.css'>\n"+
+                        "</head>\n");
+                bw.write("<div class='Bouton'><button class='favorite styled' type='button'>Identification</button>\n</div>\n");
+                bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='../fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
+                bw.write("<body>\n");
                 lectureAgentStuff = new BufferedReader(new FileReader("fiches_agents/"+personne+".txt"));
+                int i = 0;
+                bw.write("<h1>");
+                while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
+                    if ((i==0) || (i==1)) {
+                        bw.write(ligneAgentStuff + " ");
+                    }
+                    if (i==2) {
+                        bw.write("</h1>");
+                        bw.write(" \n");
+                        bw.write("<br>");
+                        bw.write("<div class='Poste'>");
+                        bw.write("<p>"+ligneAgentStuff+"</p>");
+                        bw.write("</div>");
+                        bw.write("\n");
+                    }
 
-                while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null)
-                    bw.write(ligneAgentStuff+"\n<br>");
-                //System.out.println(ligneAgentStuff);
+                    if (i>4) {
+                        bw.write("<br>");
+                        bw.write("<div class='Materiel'>");
+                        bw.write("<p>"+ligneAgentStuff+"</p>");
+                        bw.write("</div>");
+                        bw.write("\n");
+                    }
+                    i++;
+                    //done
+                }
+
                 lectureAgentStuff.close();
 
                 bw.write("</body>\n</html>");
