@@ -11,9 +11,9 @@ git clone https://github.com/Kev1venteur/MSPRB3Dev.git
 ```
 
 ## Java info
-:pencil2: Built with [Adopt OpenJDK 11](https://adoptopenjdk.net/). </br>
+:pencil2: Built with [Adopt OpenJDK 11](https://adoptopenjdk.net/). </br></br>
 :pencil2: To run it, you have to download [Java](https://www.java.com/en/download/manual.jsp). </br></br>
-:pencil2: You have to build it with [maven](https://maven.apache.org/download.cgi). </br></br>
+:pencil2: You have to build it with [maven](https://maven.apache.org/download.cgi). </br>
 
 ## CI/CD
 :pencil2: Continuous Integration/Delivery with [Jenkins](https://www.jenkins.io/) </br></br>
@@ -30,17 +30,17 @@ $ java -jar MSPRB3Dev.jar
 ```
 
 ## Environnement Setup
-:pushpin: Here we installed Jenkins from LXC Container on proxmox :
-![Proxmox Tree Screenshot](annexes/screenshots/proxmox1.png)</br>
+:pushpin: Here we installed Jenkins from LXC Container on proxmox : </br>
+![Proxmox Tree Screenshot](annexes/screenshots/proxmox1.png) </br>
 ![Proxmox LXC Jenkins Screenshot](annexes/screenshots/proxmox2.png)
 
 ## How to contribute
 Just send a pull-request :trophy:
 
 ## Authors
-:cocktail: <b>Kilian Le Roux</b> - <i>Developper | Sysadmin</i>.
-:cocktail: <b>Etienne Drapp</b> - <i>Developper | Sysadmin</i>.
-:cocktail: <b>Maël Coubrun</b> - <i>Developper | Sysadmin</i>.
+:cocktail: <b>Kilian Le Roux</b> - <i>Developper | Sysadmin</i>. </br>
+:cocktail: <b>Etienne Drapp</b> - <i>Developper | Sysadmin</i>. </br>
+:cocktail: <b>Maël Coubrun</b> - <i>Developper | Sysadmin</i>. </br>
 :cocktail: <b>Kévin Gillet</b> - <i>Developper | Sysadmin</i> - <a href="https://www.linkedin.com/in/k%C3%A9vin-gillet-50b25b175/">Linkedin</a>.
 
 ## Sources
