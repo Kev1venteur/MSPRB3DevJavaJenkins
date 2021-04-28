@@ -16,7 +16,7 @@ public class javaAgents {
 
             while ((ligne = lecture.readLine()) != null){
 
-                System.out.println(ligne);
+                //System.out.println(ligne);
                 personneHTML = "agents/"+ligne+".html";
                 personne = ligne;
 
@@ -30,13 +30,37 @@ public class javaAgents {
                 BufferedWriter bw = new BufferedWriter(fichierEcriture);
 
                 bw.write("<!DOCTYPE html>\n");
-                bw.write("<html lang=\"en\">\n" + "<body>\n" + "<h1>"+personne+"</h1>\n");
+                bw.write("<html lang=\"en\">\n" + "<body>\n");
 
+                bw.write("<img class='ImageIdentite' src='fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n");
                 lectureAgentStuff = new BufferedReader(new FileReader("fiches_agents/"+personne+".txt"));
+                int i = 0;
+                bw.write("<h1>");
+                while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
+                    if ((i==0) || (i==1)) {
+                        bw.write(ligneAgentStuff + " ");
+                    }
+                    if (i==2) {
+                        bw.write("</h1>");
+                        bw.write(" \n");
+                        bw.write("<br>");
+                        bw.write("<div class='Poste'>");
+                        bw.write("<p>"+ligneAgentStuff+"</p>");
+                        bw.write("</div>");
+                        bw.write("\n");
+                    }
 
-                while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null)
-                    bw.write(ligneAgentStuff+"\n<br>");
-                    //System.out.println(ligneAgentStuff);
+                    if (i>4) {
+                        bw.write("<br>");
+                        bw.write("<div class='Materiel'>");
+                        bw.write("<p>"+ligneAgentStuff+"</p>");
+                        bw.write("</div>");
+                        bw.write("\n");
+                    }
+                    i++;
+                    //done
+                }
+
                 lectureAgentStuff.close();
 
                 bw.write("</body>\n</html>");
@@ -52,8 +76,5 @@ public class javaAgents {
         }
 
     }
-
-
-
 
 }
