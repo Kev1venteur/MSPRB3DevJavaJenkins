@@ -1,9 +1,40 @@
-package agents;
+package src.main.java.com.msprb3;
 
 import java.io.*;
 
-public class javaAgents {
-    public static void main(String[] args) throws IOException {
+public class Export {
+    public static void genererAccueil() throws IOException {
+        BufferedReader lecture;
+        String ligne;
+
+        try{
+
+            File fichier = new File("index.html");
+
+            if(!fichier.exists()){
+                fichier.createNewFile();
+            }
+
+            FileWriter fichierEcriture = new FileWriter(fichier.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fichierEcriture);
+
+            bw.write("<!DOCTYPE html>\n");
+            bw.write("<html lang=\"en\">\n<body>\n<h1>Accueil !</h1>");
+
+            lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));
+
+            while ((ligne = lecture.readLine()) != null)
+                bw.write("<a href='agents/"+ligne+".html'>"+ligne+"</a><br>");
+            lecture.close();
+            bw.write("</body></html>");
+        }
+        catch (FileNotFoundException exc){
+            System.out.println("Erreur !");
+
+        }
+    }
+
+    public static void genererAgent() throws IOException {
         BufferedReader lecture;
         BufferedReader lectureAgentStuff;
         String ligne;
@@ -16,7 +47,7 @@ public class javaAgents {
 
             while ((ligne = lecture.readLine()) != null){
 
-                System.out.println(ligne);
+                //System.out.println(ligne);
                 personneHTML = "agents/"+ligne+".html";
                 personne = ligne;
 
@@ -36,7 +67,7 @@ public class javaAgents {
 
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null)
                     bw.write(ligneAgentStuff+"\n<br>");
-                    //System.out.println(ligneAgentStuff);
+                //System.out.println(ligneAgentStuff);
                 lectureAgentStuff.close();
 
                 bw.write("</body>\n</html>");
@@ -52,8 +83,4 @@ public class javaAgents {
         }
 
     }
-
-
-
-
 }
