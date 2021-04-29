@@ -18,7 +18,7 @@ public class Export {
                 fichierIndex.createNewFile();                                                   //Dans le cas contraire, il est créé
             }
 
-            FileWriter fichierIndexEcriture = new FileWriter(fichierIndex.getAbsoluteFile());   //Recuperation du chemin exacte du fichier définit précédemment dans la variable fichierIndex
+            FileWriter fichierIndexEcriture = new FileWriter(fichierIndex.getAbsoluteFile(), StandardCharsets.UTF_8);   //Recuperation du chemin exacte du fichier définit précédemment dans la variable fichierIndex
             BufferedWriter bufferIndex = new BufferedWriter(fichierIndexEcriture);              //Stockage dans un buffer
 
             bufferIndex.write("<!DOCTYPE html>\n "+
@@ -87,7 +87,7 @@ public class Export {
                     fichier.createNewFile();
                 }
 
-                FileWriter fichierEcriture = new FileWriter(fichier.getAbsoluteFile());             //Recuperation du chemin du fichier
+                FileWriter fichierEcriture = new FileWriter(fichier.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
                 BufferedWriter bw = new BufferedWriter(fichierEcriture);                            //Ajout dans un buffer
 
                 bw.write("<!DOCTYPE html>\n");
