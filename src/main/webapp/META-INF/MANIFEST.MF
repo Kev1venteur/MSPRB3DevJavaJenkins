@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Created-By: Apache Maven 3.6.3
+Built-By: red
+Build-Jdk: 11.0.11
+Specification-Title: msprb3
+Specification-Version: 1.0
+Implementation-Title: msprb3
+Implementation-Version: 1.0
+Implementation-Vendor-Id: src.main.java.com.epsi.msprb3
+Main-Class: com.epsi.msprb3.App
+
