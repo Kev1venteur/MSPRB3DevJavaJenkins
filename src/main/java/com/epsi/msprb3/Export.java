@@ -78,9 +78,8 @@ public class Export {
                 File fichier = new File(personneHTML);                                              //Le nom du fichier sera la personne.html
                 File dossierAgent = new File("agents");
 
-                if(!dossierAgent.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
+                if(!dossierAgent.exists()){                                                              //Si le dossier n'existe pas, création de ce dernier
                     dossierAgent.mkdir();
-                    System.out.println("a");
                 }
 
                 if(!fichier.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
