@@ -100,7 +100,7 @@ public class Export {
                 bw.write("<div class='Bouton'><button class='favorite styled' type='button' ht onclick=window.location.href='index.html'>Retour</button>\n</div>\n");
                 bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
                 bw.write("<body>\n");
-                lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/"+personne+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
+                lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/"+personne+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
                 int i = 0;
                 bw.write("<h1>");
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){                                       //Tant qu'il y a des lignes, il va continuer la boucle
