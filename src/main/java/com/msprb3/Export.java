@@ -38,7 +38,7 @@ public class Export {
 
             bufferIndex.write("</div>\n"+
                     "</body>\n"+
-                    "<footer>\n MSPR - JAVA Â© 2021 Copyright\n</footer>\n"+
+                    "<footer>\n MSPR - JAVA © 2021 Copyright\n</footer>\n"+
                     "</html>");
             bufferIndex.close();
 
@@ -82,7 +82,7 @@ public class Export {
                         "<meta charset='utf-8'>\n"+
                         "<link rel='stylesheet' href='../style/agent.css'>\n"+
                         "</head>\n");
-                bw.write("<div class='Bouton'><button class='favorite styled' type='button'>Identification</button>\n</div>\n");
+                bw.write("<div class='Bouton'><button class='favorite styled' type='button' ht onclick=window.location.href='../index.html'>Retour</button>\n</div>\n");
                 bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='../fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
                 bw.write("<body>\n");
                 lectureAgentStuff = new BufferedReader(new FileReader("fiches_agents/"+personne+".txt"));
@@ -115,7 +115,9 @@ public class Export {
 
                 lectureAgentStuff.close();
 
-                bw.write("</body>\n</html>");
+                bw.write("</body>\n"+
+                        "<footer>\n MSPR - JAVA © 2021 Copyright\n</footer>\n"+
+                        "</html>");
 
                 bw.close();
             }
