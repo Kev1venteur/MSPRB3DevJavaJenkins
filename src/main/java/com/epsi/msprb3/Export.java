@@ -26,8 +26,8 @@ public class Export {
                     "<meta charset='utf-8'>\n "+
                     "<link rel='stylesheet' href='style/accueil.css'>\n"+                       //Ecriture du code HTML
                     " </head>\n "+
-                    "<img class='Logo' src='annexes/images/LogoGOSecuri.jpg' alt='Logo GOSecuri'>\n"+
-                    "<h1>MSPR - JAVA Accueil</h1>\n"+
+                    "<div class='Logo'><img class='Logo' src='annexes/images/LogoGOSecuri.jpg' alt='Logo GOSecuri'></div><br>\n"+
+                    "<div><h1>MSPR - JAVA Accueil</h1></div><br>\n"+
                     "<body>\n"+
                     "<div class='List'>\n");
 
