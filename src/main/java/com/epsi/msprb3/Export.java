@@ -1,35 +1,59 @@
-package src.main.java.com.epsi.msprb3;
+package com.epsi.msprb3;
 
 import java.io.*;
+import java.util.ArrayList;                                                                     //Importation des librairies utiles au projets
+import java.util.Collections;
+import java.util.List;
 
 public class Export {
     public static void genererAccueil() throws IOException {
-        BufferedReader lecture;
-        String ligne;
+        BufferedReader lecture;         //Définition des variables
+        String ligne1;
 
-        try{
+        try{                                                                                    //Lancement du code
+            File fichierIndex = new File("index.html");                                //Définition de quel fichier va être utiliser
 
-            File fichier = new File("index.html");
-
-            if(!fichier.exists()){
-                fichier.createNewFile();
+            if(!fichierIndex.exists()){                                                         //Verification si le fichier existe,
+                fichierIndex.createNewFile();                                                   //Dans le cas contraire, il est créé
             }
 
-            FileWriter fichierEcriture = new FileWriter(fichier.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fichierEcriture);
+            FileWriter fichierIndexEcriture = new FileWriter(fichierIndex.getAbsoluteFile());   //Recuperation du chemin exacte du fichier définit précédemment dans la variable fichierIndex
+            BufferedWriter bufferIndex = new BufferedWriter(fichierIndexEcriture);              //Stockage dans un buffer
 
-            bw.write("<!DOCTYPE html>\n");
-            bw.write("<html lang=\"en\">\n<body>\n<h1>Accueil !</h1>");
+            bufferIndex.write("<!DOCTYPE html>\n "+
+                    "<html lang='en'>\n"+
+                    "<head>\n <title>MSPR - JAVA</title>\n" +
+                    "<meta charset='utf-8'>\n "+
+                    "<link rel='stylesheet' href='style/accueil.css'>\n"+                       //Ecriture du code HTML
+                    " </head>\n "+
+                    "<img class='Logo' src='annexes/images/LogoGOSecuri.jpg' alt='Logo GOSecuri'>\n"+
+                    "<h1>MSPR - JAVA Accueil</h1>\n"+
+                    "<body>\n"+
+                    "<div class='List'>\n");
 
-            lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));
 
-            while ((ligne = lecture.readLine()) != null)
-                bw.write("<a href='agents/"+ligne+".html'>"+ligne+"</a><br>");
-            lecture.close();
-            bw.write("</body></html>");
+            lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));    //Lecture du fichier staff.txt ligne par ligne
+
+            List liste = new ArrayList();                                                       //Creation d'une liste qui va stocker nos agents
+            while ((ligne1 = lecture.readLine()) != null){                                      //Tant qu'il y a des lignes, la boucle continue
+                liste.add(ligne1);                                                              //Ajout d'une ligne du fichier txt dans la ligne
+                Collections.sort(liste);                                                        //Rangement de la liste par ordre alphabétique
+            }
+
+            for (Object o : liste) {
+                bufferIndex.write("<a href='agents/" + o + ".html'>" + o + "</a><br>\n");   //Pour chaque objet dans la liste, écriture de l'objet (pnom des agents)
+            }
+
+
+            bufferIndex.write("</div>\n"+                                                   //Ecriture de l'HTML (fin)
+                    "</body>\n"+
+                    "<footer>\n MSPR - JAVA © 2021 Copyright\n</footer>\n"+
+                    "</html>");
+            bufferIndex.close();                                                                //Fermeture du buffer ouvert au début
+
         }
-        catch (FileNotFoundException exc){
-            System.out.println("Erreur !");
+        catch (FileNotFoundException exc){                                                      //Si il y a une erreur, affiche Erreur dans le terminal
+            exc.printStackTrace();
 
         }
     }
@@ -43,34 +67,73 @@ public class Export {
         String personne;
 
         try{
-            lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));
+            lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));        //Lecture du fichier staff.txt
 
-            while ((ligne = lecture.readLine()) != null){
+            while ((ligne = lecture.readLine()) != null){                                           //Tant qu'il y a des lignes dans staff.txt, il continue la boucle
 
                 //System.out.println(ligne);
-                personneHTML = "agents/"+ligne+".html";
+                personneHTML = "agents/"+ligne+".html";                                             //Deux variable, l'une avec la personne et l'autre avec la personne avec un .html ) la fin
                 personne = ligne;
 
-                File fichier = new File(personneHTML);
+                File fichier = new File(personneHTML);                                              //Le nom du fichier sera la personne.html
+                File dossierAgent = new File("agents");
 
-                if(!fichier.exists()){
+                if(!dossierAgent.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
+                    dossierAgent.mkdir();
+                    System.out.println("a");
+                }
+
+                if(!fichier.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                     fichier.createNewFile();
                 }
 
-                FileWriter fichierEcriture = new FileWriter(fichier.getAbsoluteFile());
-                BufferedWriter bw = new BufferedWriter(fichierEcriture);
+                FileWriter fichierEcriture = new FileWriter(fichier.getAbsoluteFile());             //Recuperation du chemin du fichier
+                BufferedWriter bw = new BufferedWriter(fichierEcriture);                            //Ajout dans un buffer
 
                 bw.write("<!DOCTYPE html>\n");
-                bw.write("<html lang=\"en\">\n" + "<body>\n" + "<h1>"+personne+"</h1>\n");
+                bw.write("<html lang='fr'>\n");
+                bw.write("<head>\n " +
+                        "<title>"+personne+"</title>\n"+                                            //Generation du code HTML dans le fichier
+                        "<meta charset='utf-8'>\n"+
+                        "<link rel='stylesheet' href='../style/agent.css'>\n"+
+                        "</head>\n");
+                bw.write("<div class='Bouton'><button class='favorite styled' type='button' ht onclick=window.location.href='../index.html'>Retour</button>\n</div>\n");
+                bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='../fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
+                bw.write("<body>\n");
+                lectureAgentStuff = new BufferedReader(new FileReader("fiches_agents/"+personne+".txt"));       //Lecture du fichier txt qui appartient à la personne
+                int i = 0;
+                bw.write("<h1>");
+                while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){                                       //Tant qu'il y a des lignes, il va continuer la boucle
+                    if ((i==0) || (i==1)) {                                                         //Pour les 2 première lignes
+                        bw.write(ligneAgentStuff + " ");                                        //Ecriture du nom/prenom
+                    }
+                    if (i==2) {                                                                     //Pour la 3eme ligne, ecriture du poste
+                        bw.write("</h1>");
+                        bw.write(" \n");
+                        bw.write("<br>");
+                        bw.write("<div class='Poste'>");
+                        bw.write("<p>Poste : <strong>"+ligneAgentStuff+"</strong></p>");
+                        bw.write("</div>");
+                        bw.write("\n");
+                        bw.write("<p>Equipements :\n</p>");
+                    }                                                                               //Pas d'affichage de la 4eme ligne car c'est le mot de passe
 
-                lectureAgentStuff = new BufferedReader(new FileReader("fiches_agents/"+personne+".txt"));
+                    if (i>4) {                                                                      //Pour la 5eme ligne et plus, c'est le materiel de la personne qui est écrit
+                        bw.write("<br>");
+                        bw.write("<div class='Materiel'>");
+                        bw.write("<p> - "+ligneAgentStuff+" ✅</p>");
+                        bw.write("</div>");
+                        bw.write("\n");
+                    }
+                    i++;
+                    //done
+                }
 
-                while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null)
-                    bw.write(ligneAgentStuff+"\n<br>");
-                //System.out.println(ligneAgentStuff);
                 lectureAgentStuff.close();
 
-                bw.write("</body>\n</html>");
+                bw.write("</body>\n"+
+                        "<footer>\n MSPR - JAVA © 2021 Copyright\n</footer>\n"+
+                        "</html>");
 
                 bw.close();
             }
@@ -78,7 +141,7 @@ public class Export {
             System.out.println("Done !");
             lecture.close();
 
-        }catch(FileNotFoundException exc){
+        }catch(FileNotFoundException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
             exc.printStackTrace();
         }
 

@@ -22,7 +22,7 @@
         <configuration>
             <archive>
                 <manifest>
-                    <mainClass>src.main.java.com.epsi.msprb3.App</mainClass>
+                    <mainClass>com.epsi.msprb3.App</mainClass>
                 </manifest>
             </archive>
         </configuration>
@@ -38,7 +38,7 @@
                     <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
                     <addClasspath>true</addClasspath>
                     <classpathPrefix>lib/</classpathPrefix>
-                    <mainClass>src.main.java.com.epsi.msprb3.App</mainClass>
+                    <mainClass>com.epsi.msprb3.App</mainClass>
                 </manifest>
             </archive>
         </configuration>

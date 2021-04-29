@@ -7,5 +7,5 @@ Specification-Version: 1.0
 Implementation-Title: msprb3
 Implementation-Version: 1.0
 Implementation-Vendor-Id: src.main.java.com.epsi.msprb3
-Main-Class: src.main.java.com.epsi.msprb3.App
+Main-Class: com.epsi.msprb3.App
 
