@@ -1,6 +1,7 @@
 package com.epsi.msprb3;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;                                                                     //Importation des librairies utiles au projets
 import java.util.Collections;
 import java.util.List;
@@ -32,7 +33,7 @@ public class Export {
                     "<div class='List'>\n");
 
 
-            lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));    //Lecture du fichier staff.txt ligne par ligne
+            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/staff.txt"), StandardCharsets.UTF_8));    //Lecture du fichier staff.txt ligne par ligne
 
             List liste = new ArrayList();                                                       //Creation d'une liste qui va stocker nos agents
             while ((ligne1 = lecture.readLine()) != null){                                      //Tant qu'il y a des lignes, la boucle continue
@@ -67,7 +68,7 @@ public class Export {
         String personne;
 
         try{
-            lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));        //Lecture du fichier staff.txt
+            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/staff.txt"), StandardCharsets.UTF_8));        //Lecture du fichier staff.txt
 
             while ((ligne = lecture.readLine()) != null){                                           //Tant qu'il y a des lignes dans staff.txt, il continue la boucle
 
@@ -99,7 +100,7 @@ public class Export {
                 bw.write("<div class='Bouton'><button class='favorite styled' type='button' ht onclick=window.location.href='../index.html'>Retour</button>\n</div>\n");
                 bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='../fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
                 bw.write("<body>\n");
-                lectureAgentStuff = new BufferedReader(new FileReader("fiches_agents/"+personne+".txt"));       //Lecture du fichier txt qui appartient à la personne
+                lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/"+personne+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
                 int i = 0;
                 bw.write("<h1>");
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){                                       //Tant qu'il y a des lignes, il va continuer la boucle
