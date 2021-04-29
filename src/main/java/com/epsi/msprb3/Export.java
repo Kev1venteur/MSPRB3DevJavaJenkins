@@ -1,4 +1,4 @@
-package src.main.java.com.msprb3;
+package src.main.java.com.epsi.msprb3;
 
 import java.io.*;
 
@@ -79,7 +79,7 @@ public class Export {
             lecture.close();
 
         }catch(FileNotFoundException exc){
-            System.out.println("Pouet !");
+            exc.printStackTrace();
         }
 
     }

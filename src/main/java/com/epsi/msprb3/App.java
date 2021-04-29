@@ -1,4 +1,4 @@
-package src.main.java.com.msprb3;
+package src.main.java.com.epsi.msprb3;
 
 import java.io.*;
 
