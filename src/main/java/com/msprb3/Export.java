@@ -1,6 +1,9 @@
 package com.msprb3;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Export {
     public static void genererAccueil() throws IOException {
@@ -31,8 +34,14 @@ public class Export {
 
             lecture = new BufferedReader(new FileReader("fiches_agents/staff.txt"));
 
+            List liste = new ArrayList();
             while ((ligne1 = lecture.readLine()) != null){
-                bufferIndex.write("<a href='agents/"+ligne1+".html'>"+ligne1+"</a><br>\n");
+                liste.add(ligne1);
+                Collections.sort(liste);
+            }
+
+            for (Object o : liste) {
+                bufferIndex.write("<a href='agents/" + o + ".html'>" + o + "</a><br>\n");
             }
 
 
@@ -105,7 +114,7 @@ public class Export {
                     if (i>4) {
                         bw.write("<br>");
                         bw.write("<div class='Materiel'>");
-                        bw.write("<p>"+ligneAgentStuff+"</p>");
+                        bw.write("<p>"+ligneAgentStuff+" ✅</p>");
                         bw.write("</div>");
                         bw.write("\n");
                     }
