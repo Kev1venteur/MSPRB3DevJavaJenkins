@@ -25,15 +25,15 @@ public class Export {
                     "<html lang='en'>\n"+
                     "<head>\n <title>MSPR - JAVA</title>\n" +
                     "<meta charset='utf-8'>\n "+
-                    "<link rel='stylesheet' href='/var/www/html/msprb3/style/accueil.css'>\n"+                       //Ecriture du code HTML
+                    "<link rel='stylesheet' href='style/accueil.css'>\n"+                       //Ecriture du code HTML
                     " </head>\n "+
-                    "<div class='Logo'><img class='Logo' src='/var/www/html/msprb3/annexes/images/LogoGOSecuri.jpg' alt='Logo GOSecuri'></div><br>\n"+
+                    "<div class='Logo'><img class='Logo' src='images/LogoGOSecuri.jpg' alt='Logo GOSecuri'></div><br>\n"+
                     "<div><h1>MSPR - JAVA Accueil</h1></div><br>\n"+
                     "<body>\n"+
                     "<div class='List'>\n");
 
 
-            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("/var/www/html/msprb3/fiches_agents/staff.txt"), StandardCharsets.UTF_8));    //Lecture du fichier staff.txt ligne par ligne
+            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/staff.txt"), StandardCharsets.UTF_8));    //Lecture du fichier staff.txt ligne par ligne
 
             List liste = new ArrayList();                                                       //Creation d'une liste qui va stocker nos agents
             while ((ligne1 = lecture.readLine()) != null){                                      //Tant qu'il y a des lignes, la boucle continue
@@ -68,7 +68,7 @@ public class Export {
         String personne;
 
         try{
-            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("/var/www/html/msprb3/fiches_agents/staff.txt"), StandardCharsets.UTF_8));        //Lecture du fichier staff.txt
+            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/staff.txt"), StandardCharsets.UTF_8));        //Lecture du fichier staff.txt
 
             while ((ligne = lecture.readLine()) != null){                                           //Tant qu'il y a des lignes dans staff.txt, il continue la boucle
 
@@ -95,12 +95,12 @@ public class Export {
                 bw.write("<head>\n " +
                         "<title>"+personne+"</title>\n"+                                            //Generation du code HTML dans le fichier
                         "<meta charset='utf-8'>\n"+
-                        "<link rel='stylesheet' href='/var/www/html/msprb3/style/agent.css'>\n"+
+                        "<link rel='stylesheet' href='style/agent.css'>\n"+
                         "</head>\n");
-                bw.write("<div class='Bouton'><button class='favorite styled' type='button' ht onclick=window.location.href='/var/www/html/msprb3/index.html'>Retour</button>\n</div>\n");
-                bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='/var/www/html/msprb3/fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
+                bw.write("<div class='Bouton'><button class='favorite styled' type='button' ht onclick=window.location.href='index.html'>Retour</button>\n</div>\n");
+                bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
                 bw.write("<body>\n");
-                lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("/var/www/html/msprb3/fiches_agents/"+personne+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
+                lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/"+personne+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
                 int i = 0;
                 bw.write("<h1>");
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){                                       //Tant qu'il y a des lignes, il va continuer la boucle
