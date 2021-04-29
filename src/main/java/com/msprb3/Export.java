@@ -106,15 +106,16 @@ public class Export {
                         bw.write(" \n");
                         bw.write("<br>");
                         bw.write("<div class='Poste'>");
-                        bw.write("<p>"+ligneAgentStuff+"</p>");
+                        bw.write("<p>Poste : <strong>"+ligneAgentStuff+"</strong></p>");
                         bw.write("</div>");
                         bw.write("\n");
+                        bw.write("<p>Equipements :\n</p>");
                     }
 
                     if (i>4) {
                         bw.write("<br>");
                         bw.write("<div class='Materiel'>");
-                        bw.write("<p>"+ligneAgentStuff+" ✅</p>");
+                        bw.write("<p> - "+ligneAgentStuff+" ✅</p>");
                         bw.write("</div>");
                         bw.write("\n");
                     }
