@@ -33,7 +33,7 @@ public class Export {
                     "<div class='List'>\n");
 
 
-            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/staff.txt"), StandardCharsets.UTF_8));    //Lecture du fichier staff.txt ligne par ligne
+            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));    //Lecture du fichier staff.txt ligne par ligne
 
             List liste = new ArrayList();                                                       //Creation d'une liste qui va stocker nos agents
             while ((ligne1 = lecture.readLine()) != null){                                      //Tant qu'il y a des lignes, la boucle continue
@@ -68,7 +68,7 @@ public class Export {
         String personne;
 
         try{
-            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("fiches_agents/staff.txt"), StandardCharsets.UTF_8));        //Lecture du fichier staff.txt
+            lecture = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));        //Lecture du fichier staff.txt
 
             while ((ligne = lecture.readLine()) != null){                                           //Tant qu'il y a des lignes dans staff.txt, il continue la boucle
 
