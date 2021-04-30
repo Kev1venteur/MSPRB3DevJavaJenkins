@@ -1,10 +1,16 @@
 package com.epsi.msprb3;
 
+import java.lang.*;
 import java.io.*;
+import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;                                                                     //Importation des librairies utiles au projets
 import java.util.Collections;
 import java.util.List;
+import java.util.*;
+import java.security.*;
+
 
 public class Export {
     public static void genererAccueil() throws IOException {
@@ -83,6 +89,7 @@ public class Export {
                     dossierAgent.mkdir();
                 }
 
+
                 if(!fichier.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                     fichier.createNewFile();
                 }
@@ -100,7 +107,9 @@ public class Export {
                 bw.write("<div class='Bouton'><button class='favorite styled' type='button' ht onclick=window.location.href='index.html'>Retour</button>\n</div>\n");
                 bw.write("<div class='Imageprofile'>\n<img class='ImageIdentite' src='fiches_agents_photos/"+personne+".jpg' alt='Photo identite'>\n</div>\n");
                 bw.write("<body>\n");
+
                 lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/"+personne+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
+
                 int i = 0;
                 bw.write("<h1>");
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){                                       //Tant qu'il y a des lignes, il va continuer la boucle
@@ -138,10 +147,68 @@ public class Export {
                 bw.close();
             }
 
+
+
             System.out.println("Done !");
             lecture.close();
 
         }catch(FileNotFoundException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
+            exc.printStackTrace();
+        }
+
+    }
+
+    public static void genererHtAccess() throws IOException {
+        //CREATION MDP DANS FICHIER HTACCESS
+        try{
+            BufferedReader lectureHtAccess;
+            String ligneHtAccess;
+            BufferedReader lectureAgentStuff;
+            String ligneAgentStuff;
+            File dossierHtAccess = new File("/var/www/html/msprb3/htaccess");
+
+            if(!dossierHtAccess.exists()){                                                              //Si le dossier n'existe pas, création de ce dernier
+                dossierHtAccess.mkdir();
+            }
+
+            File fichierHtAccess = new File("/var/www/html/msprb3/htaccess/.htaccess");
+            if(!fichierHtAccess.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
+                fichierHtAccess.createNewFile();
+            }
+
+            FileWriter fichierEcritureAccess = new FileWriter(fichierHtAccess.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
+            BufferedWriter bwAccess = new BufferedWriter(fichierEcritureAccess);
+
+            lectureHtAccess = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));
+
+            while ((ligneHtAccess = lectureHtAccess.readLine()) != null){
+                bwAccess.write(ligneHtAccess+":");                                                  //ajout user dans fichier htaccess
+                lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/"+ligneHtAccess+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
+                int i = 0;
+                while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
+                    if (i==3) {
+
+                        MessageDigest md = MessageDigest.getInstance("MD5");                            //On prend le hashage MD5
+                        md.reset();
+                        md.update(ligneAgentStuff.getBytes());                                           //Notre password se transforme en bytes
+
+                        byte[] chaineByte = md.digest();                                                //Stockage des bytes dans un array
+                        BigInteger bigInt = new BigInteger(1,chaineByte);                           //passage de bit en bigint
+                        String passwordHash = bigInt.toString(16);                                  //Passage de bigint en string
+
+                        while(passwordHash.length() < 32){                                              //Concatenation de tous les caractères
+                            passwordHash = "0" + passwordHash;
+                        }
+
+                        bwAccess.write(passwordHash+"\n");
+
+                    }
+                    i++;
+                    //done
+                }
+            }
+            bwAccess.close();
+        }catch(FileNotFoundException | NoSuchAlgorithmException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
             exc.printStackTrace();
         }
 
