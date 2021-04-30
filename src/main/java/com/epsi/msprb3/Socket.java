@@ -4,14 +4,11 @@ import java.lang.*;
 
 public class Socket {
 
-    static class ThreadAccueil extends Thread{
+    static class ThreadAccueil extends Thread{                  //Creation premier thread
         @Override
-        public void run(){
+        public void run(){                                      //Reecriture du run pour ThreadAccueil
             try {
-                Export.genererAccueil();
-                for(int i=0;i<10000;i++){
-                    System.out.println("Premier thread");
-                }
+                Export.genererAccueil();                        //Le run va lancer la génération de l'accueil ou afficher une erreur s'il ne peut pas
 
             } catch (IOException exc) {
                 exc.printStackTrace();
@@ -19,14 +16,11 @@ public class Socket {
         }
     }
 
-    static class ThreadAgent extends Thread{
+    static class ThreadAgent extends Thread{                    //Creation du deuxieme thread
         @Override
-        public void run(){
+        public void run(){                                      //Reecriture du run pour ThreadAgent
             try {
-                Export.genererAgent();
-                for(int a=0;a<10000;a++){
-                    System.out.println("Deuxieme thread");
-                }
+                Export.genererAgent();                          //Le run va lancer la génération des agents ou afficher une erreur s'il ne peut pas
             } catch (IOException exc) {
                 exc.printStackTrace();
             }
@@ -34,10 +28,12 @@ public class Socket {
     }
 
     public static void InitThread(){
-        Thread tAgent = new Thread(new ThreadAccueil());
-        Thread tAccueil = new Thread(new ThreadAgent());
+        Thread tAccueil = new Thread(new ThreadAccueil());      //Initialisation des threads
+        Thread tAgent = new Thread(new ThreadAgent());
 
-        tAgent.start();
-        tAccueil.start();
+
+        tAccueil.start();                                       //Lancement des threads
+        tAgent.start();                                         //Disclaimer : Les programmes sont trop rapides donc pas possible de vérifier sans modifier le code actuellement
+                                                                //que les deux threads s'éxécutent bien en même temps. Mais après des tests, il s'est avéré qu'ils le font.
     }
 }
