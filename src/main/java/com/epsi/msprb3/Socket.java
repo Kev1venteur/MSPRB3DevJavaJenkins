@@ -3,10 +3,7 @@ import java.io.IOException;
 import java.lang.*;
 
 public class Socket {
-    public static void InitThread(){
-        new Thread(new Thread1()).start();
-        new Thread(new Thread2()).start();
-    }
+
     static class Thread1 implements Runnable{
         @Override
         public void run(){
@@ -26,12 +23,20 @@ public class Socket {
         public void run(){
             try {
                 Export.genererAgent();
-                for(int i=0;i<10;i++){
-                    System.out.println("Deuxième thread");
+                for(int a=0;a<10;a++){
+                    System.out.println("Deuxieme thread");
                 }
             } catch (IOException exc) {
                 exc.printStackTrace();
             }
         }
+    }
+
+    public static void InitThread(){
+        Thread t1 = new Thread(new Thread1());
+        Thread t2 = new Thread(new Thread2());
+
+        t1.start();
+        t2.start();
     }
 }
