@@ -2,11 +2,11 @@
 This is the MSPR project of the third year at EPSI Nantes. Project Duration : 20h.
 
 The Java Program : </br>
+  &nbsp;&nbsp;&nbsp;&nbsp;0 - Works on multi Threads; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;1 - Read text file; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;2 - Generate HTML from infos in text files; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;3 - Check if export files/folders exist and create them if not; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;4 - Write into files the generated HTML code; </br>
-  &nbsp;&nbsp;&nbsp;&nbsp;5 - Generate HTML file on multi threads; </br>
 
 
 ## How to Start
