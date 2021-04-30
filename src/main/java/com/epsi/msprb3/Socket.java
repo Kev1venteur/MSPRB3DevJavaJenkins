@@ -12,7 +12,10 @@ public class Socket {
         public void run(){
             try {
                 Export.genererAccueil();
-                System.out.println(1);
+                for(int i=0;i<10;i++){
+                    System.out.println("Premier thread");
+                }
+
             } catch (IOException exc) {
                 exc.printStackTrace();
             }
@@ -23,7 +26,9 @@ public class Socket {
         public void run(){
             try {
                 Export.genererAgent();
-                System.out.println(2);
+                for(int i=0;i<10;i++){
+                    System.out.println("Deuxième thread");
+                }
             } catch (IOException exc) {
                 exc.printStackTrace();
             }
