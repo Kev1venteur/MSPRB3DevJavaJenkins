@@ -6,6 +6,7 @@ The Java Program : </br>
   &nbsp;&nbsp;&nbsp;&nbsp;2 - Generate HTML from infos in text files; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;3 - Check if export files/folders exist and create them if not; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;4 - Write into files the generated HTML code; </br>
+  &nbsp;&nbsp;&nbsp;&nbsp;5 - Generate HTML file on multi threads; </br>
 
 
 ## How to Start
