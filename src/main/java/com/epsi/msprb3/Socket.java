@@ -4,7 +4,7 @@ import java.lang.*;
 
 public class Socket {
 
-    static class Thread1 implements Runnable{
+    static class ThreadAccueil extends Thread{
         @Override
         public void run(){
             try {
@@ -18,7 +18,8 @@ public class Socket {
             }
         }
     }
-    static class Thread2 implements Runnable{
+
+    static class ThreadAgent extends Thread{
         @Override
         public void run(){
             try {
@@ -33,10 +34,10 @@ public class Socket {
     }
 
     public static void InitThread(){
-        Thread t1 = new Thread(new Thread1());
-        Thread t2 = new Thread(new Thread2());
+        Thread tAgent = new Thread(new ThreadAccueil());
+        Thread tAccueil = new Thread(new ThreadAgent());
 
-        t1.start();
-        t2.start();
+        tAgent.start();
+        tAccueil.start();
     }
 }
