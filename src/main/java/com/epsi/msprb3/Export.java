@@ -1,5 +1,7 @@
 package com.epsi.msprb3;
 
+import org.w3c.dom.UserDataHandler;
+
 import java.lang.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -163,38 +165,81 @@ public class Export {
             String ligneHtAccess;
             BufferedReader lectureAgentStuff;
             String ligneAgentStuff;
-            File dossierHtAccess = new File("/var/www/html/msprb3/htaccess");
 
-            if(!dossierHtAccess.exists()){                                                              //Si le dossier n'existe pas, création de ce dernier
-                dossierHtAccess.mkdir();
-            }
-
-            File fichierHtAccess = new File("/var/www/html/msprb3/htaccess/.htaccess");
+            File fichierHtAccess = new File("/var/www/html/msprb3/.htaccess");
             if(!fichierHtAccess.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                 fichierHtAccess.createNewFile();
             }
 
-            FileWriter fichierEcritureAccess = new FileWriter(fichierHtAccess.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
-            BufferedWriter bwAccess = new BufferedWriter(fichierEcritureAccess);
+            File fichierHtPassword = new File("/var/www/html/msprb3/.htpasswd");
+            if(!fichierHtPassword.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
+                fichierHtPassword.createNewFile();
+            }
+            FileWriter fichierEcritureAccess1 = new FileWriter(fichierHtAccess.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
+            BufferedWriter bwAccess1 = new BufferedWriter(fichierEcritureAccess1);
+            bwAccess1.write("AuthName \"Zone Securisee\"\n" +
+                    "AuthType Basic\n" +
+                    "AuthUserFile \"/var/www/html/msprb3/.htpasswd\"\n" +
+                    "Require valid-user");
+            bwAccess1.close();
+
+            FileWriter fichierEcritureAccess2 = new FileWriter(fichierHtPassword.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
+            BufferedWriter bwAccess2 = new BufferedWriter(fichierEcritureAccess2);
 
             lectureHtAccess = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));
 
             while ((ligneHtAccess = lectureHtAccess.readLine()) != null){
-                bwAccess.write(ligneHtAccess+":");                                                  //ajout user dans fichier htaccess
+                bwAccess2.write(ligneHtAccess+":");                                                  //ajout user dans fichier htaccess
                 lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/"+ligneHtAccess+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
                 int i = 0;
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
                     if (i==3) {
-                        byte[] md = MessageDigest.getInstance("MD5").digest(ligneAgentStuff.getBytes(StandardCharsets.UTF_8));                            //On prend le hashage MD5
+                     /* MessageDigest md5 = MessageDigest.getInstance("MD5");                            //On prend le hashage MD5
+                        md5.reset();
+                        md5.update(ligneAgentStuff.getBytes());                                           //Notre password se transforme en bytes
+
+                        byte[] chaineByte = md5.digest();                                                //Stockage des bytes dans un array
+                        BigInteger bigInt = new BigInteger(1,chaineByte);                           //passage de bit en bigint
+                        String passwordHash = bigInt.toString(16);                                  //Passage de bigint en string
+
+                        while(passwordHash.length() < 32){                                              //Concatenation de tous les caractères
+                            passwordHash = "0" + passwordHash;
+                        }
+                        bwAccess.write(passwordHash+"\n");
+                        System.out.println(md5.toString());
+                      */
+                        String password = ligneAgentStuff;
+                        String algorithm = "SHA";
+
+                        byte[] plainText = password.getBytes();
+                        try {
+                            MessageDigest md = MessageDigest.getInstance(algorithm);
+                            md.reset();
+                            md.update(plainText);
+
+                            byte[] encodedPassword = md.digest();
+                            StringBuilder sb = new StringBuilder();
+
+                            for (int z = 0; z < encodedPassword.length; z++) {
+                                if ((encodedPassword[z] & 0xff) < 0x10) {
+                                    sb.append("0");
+                                }
+                                sb.append(Long.toString(encodedPassword[z] & 0xff, 16));
+                            }
+                            System.out.println("Non-Encrypted    : " + password);
+                            System.out.println("Encrypted: " + sb.toString());
+                            bwAccess2.write(sb.toString()+"\n");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                     i++;
                     //done
                 }
             }
-            bwAccess.close();
-        }catch(FileNotFoundException | NoSuchAlgorithmException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
+            bwAccess2.close();
+        }catch(FileNotFoundException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
             exc.printStackTrace();
         }
-
     }
 }
