@@ -187,21 +187,7 @@ public class Export {
                 int i = 0;
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
                     if (i==3) {
-
-                        MessageDigest md = MessageDigest.getInstance("MD5");                            //On prend le hashage MD5
-                        md.reset();
-                        md.update(ligneAgentStuff.getBytes());                                           //Notre password se transforme en bytes
-
-                        byte[] chaineByte = md.digest();                                                //Stockage des bytes dans un array
-                        BigInteger bigInt = new BigInteger(1,chaineByte);                           //passage de bit en bigint
-                        String passwordHash = bigInt.toString(16);                                  //Passage de bigint en string
-
-                        while(passwordHash.length() < 32){                                              //Concatenation de tous les caractères
-                            passwordHash = "0" + passwordHash;
-                        }
-
-                        bwAccess.write(passwordHash+"\n");
-
+                        byte[] md = MessageDigest.getInstance("MD5").digest(ligneAgentStuff.getBytes(StandardCharsets.UTF_8));                            //On prend le hashage MD5
                     }
                     i++;
                     //done
