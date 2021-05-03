@@ -2,13 +2,11 @@ package com.epsi.msprb3;
 
 import java.lang.*;
 import java.io.*;
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;                                                                     //Importation des librairies utiles au projets
 import java.util.Collections;
 import java.util.List;
-import java.util.*;
 import java.security.*;
 
 
@@ -165,15 +163,15 @@ public class Export {
             String ligneHtAccess;
             BufferedReader lectureAgentStuff;
             String ligneAgentStuff;
-            File dossierHtAccess = new File("/var/www/html/msprb3/htaccess");
 
-            if(!dossierHtAccess.exists()){                                                              //Si le dossier n'existe pas, création de ce dernier
-                dossierHtAccess.mkdir();
-            }
-
-            File fichierHtAccess = new File("/var/www/html/msprb3/htaccess/.htaccess");
+            File fichierHtAccess = new File("/var/www/html/msprb3/.htaccess");
             if(!fichierHtAccess.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                 fichierHtAccess.createNewFile();
+            }
+
+            File fichierHtPassword = new File("/var/www/html/msprb3/.htpasswd");
+            if(!fichierHtPassword.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
+                fichierHtPassword.createNewFile();
             }
 
             FileWriter fichierEcritureAccess = new FileWriter(fichierHtAccess.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
@@ -187,7 +185,8 @@ public class Export {
                 int i = 0;
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
                     if (i==3) {
-                        byte[] md = MessageDigest.getInstance("MD5").digest(ligneAgentStuff.getBytes(StandardCharsets.UTF_8));                            //On prend le hashage MD5
+                        byte[] md = MessageDigest.getInstance("MD5").digest(ligneAgentStuff.getBytes(StandardCharsets.UTF_8));
+                        System.out.println(md.toString());
                     }
                     i++;
                     //done
