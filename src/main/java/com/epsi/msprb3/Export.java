@@ -160,18 +160,16 @@ public class Export {
     }
 
     public static void genererHtAccess() throws IOException {
-        //CREATION MDP DANS FICHIER HTACCESS
+        //CREATION MDP DANS FICHIER HTPASSWD et Creation du fichier HTACCES
         try{
             BufferedReader lectureHtAccess;
             String ligneHtAccess;
             BufferedReader lectureAgentStuff;
             String ligneAgentStuff;
-
             File fichierHtAccess = new File("/var/www/html/msprb3/.htaccess");
             if(!fichierHtAccess.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                 fichierHtAccess.createNewFile();
             }
-
             File fichierHtPassword = new File("/var/www/html/msprb3/.htpasswd");
             if(!fichierHtPassword.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                 fichierHtPassword.createNewFile();
@@ -180,15 +178,13 @@ public class Export {
             BufferedWriter bwAccess1 = new BufferedWriter(fichierEcritureAccess1);
             bwAccess1.write("AuthName \"Zone Securisee\"\n" +
                     "AuthType Basic\n" +
-                    "AuthUserFile \"/var/www/html/msprb3/.htpasswd\"\n" +
+                    "AuthUserFile \".htpasswd\"\n" +
                     "Require valid-user");
             bwAccess1.close();
 
             FileWriter fichierEcritureAccess2 = new FileWriter(fichierHtPassword.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
             BufferedWriter bwAccess2 = new BufferedWriter(fichierEcritureAccess2);
-
             lectureHtAccess = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));
-
             while ((ligneHtAccess = lectureHtAccess.readLine()) != null){
                 bwAccess2.write(ligneHtAccess+":");                                                  //ajout user dans fichier htaccess
                 lectureAgentStuff = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/"+ligneHtAccess+".txt"), StandardCharsets.UTF_8));       //Lecture du fichier txt qui appartient à la personne
@@ -210,7 +206,7 @@ public class Export {
                         System.out.println(md5.toString());
                       */
                         String password = ligneAgentStuff;
-                        String algorithm = "SHA";
+                        String algorithm = "SHA-1";
 
                         byte[] plainText = password.getBytes();
                         try {
