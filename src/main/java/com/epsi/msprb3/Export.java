@@ -48,7 +48,7 @@ public class Export {
             }
 
             for (Object o : liste) {
-                bufferIndex.write("<a href='/var/www/html/msprb3/agents/" + o + ".html'>" + o + "</a><br>\n");   //Pour chaque objet dans la liste, écriture de l'objet (pnom des agents)
+                bufferIndex.write("<a href='agents/" + o + ".html'>" + o + "</a><br>\n");   //Pour chaque objet dans la liste, écriture de l'objet (pnom des agents)
             }
 
 
