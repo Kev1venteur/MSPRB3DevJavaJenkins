@@ -2,13 +2,11 @@ package com.epsi.msprb3;
 
 import java.lang.*;
 import java.io.*;
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;                                                                     //Importation des librairies utiles au projets
 import java.util.Collections;
 import java.util.List;
-import java.util.*;
 import java.security.*;
 
 
