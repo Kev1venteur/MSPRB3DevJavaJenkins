@@ -224,7 +224,7 @@ public class Export {
                             }
                             System.out.println("Non-Encrypted    : " + password);
                             System.out.println("Encrypted: " + sb.toString());
-                            bwAccess2.write(sb.toString()+"\n");
+                            bwAccess2.write("{SHA}"+sb.toString()+"\n");
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
