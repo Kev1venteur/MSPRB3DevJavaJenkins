@@ -4,6 +4,7 @@ import java.lang.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;                                                                     //Importation des librairies utiles au projets
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.security.*;
@@ -123,7 +124,6 @@ public class Export {
                         bw.write("\n");
                         bw.write("<p>Equipements :\n</p>");
                     }                                                                               //Pas d'affichage de la 4eme ligne car c'est le mot de passe
-
                     if (i>4) {                                                                      //Pour la 5eme ligne et plus, c'est le materiel de la personne qui est écrit
                         bw.write("<br>");
                         bw.write("<div class='Materiel'>");
@@ -134,27 +134,18 @@ public class Export {
                     i++;
                     //done
                 }
-
                 lectureAgentStuff.close();
-
                 bw.write("</body>\n"+
                         "<footer>\n MSPR - JAVA © 2021 Copyright\n</footer>\n"+
                         "</html>");
-
                 bw.close();
             }
-
-
-
             System.out.println("Done !");
             lecture.close();
-
         }catch(FileNotFoundException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
             exc.printStackTrace();
         }
-
     }
-
     public static void genererHtAccess() throws IOException {
         //CREATION MDP DANS FICHIER HTPASSWD et Creation du fichier HTACCES
         try{
@@ -184,9 +175,7 @@ public class Export {
                         "</FilesMatch>\n");
 
             }
-
             bwAccess1.close();
-
 
             FileWriter fichierEcritureAccess2 = new FileWriter(fichierHtPassword.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
             BufferedWriter bwAccess2 = new BufferedWriter(fichierEcritureAccess2);
@@ -199,7 +188,6 @@ public class Export {
                     if (i==3) {
                         String password = ligneAgentStuff;
                         String algorithm = "SHA-1";
-
                         byte[] plainText = password.getBytes();
                         try {
                             MessageDigest md = MessageDigest.getInstance(algorithm);
@@ -215,7 +203,9 @@ public class Export {
                                 }
                                 sb.append(Long.toString(encodedPassword[z] & 0xff, 16));
                             }
-                            bwAccess2.write("{SHA}"+sb.toString()+"\n");
+                            String encodedString = Base64.getEncoder().encodeToString(sb.toString().getBytes());
+                            bwAccess2.write("{SHA}"+encodedString+"\n");
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
