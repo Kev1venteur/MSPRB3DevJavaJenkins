@@ -1,11 +1,8 @@
 package com.epsi.msprb3;
 
-import org.w3c.dom.UserDataHandler;
-
 import java.lang.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;                                                                     //Importation des librairies utiles au projets
 import java.util.Collections;
 import java.util.List;
@@ -165,11 +162,12 @@ public class Export {
             String ligneHtAccess;
             BufferedReader lectureAgentStuff;
             String ligneAgentStuff;
-            File fichierHtAccess = new File("/var/www/html/msprb3/.htaccess");
+
+            File fichierHtAccess = new File("/var/www/html/msprb3/agents/.htaccess");
             if(!fichierHtAccess.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                 fichierHtAccess.createNewFile();
             }
-            File fichierHtPassword = new File("/var/www/html/msprb3/.htpasswd");
+            File fichierHtPassword = new File("/var/www/html/msprb3/agents/.htpasswd");
             if(!fichierHtPassword.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                 fichierHtPassword.createNewFile();
             }
@@ -177,9 +175,18 @@ public class Export {
             BufferedWriter bwAccess1 = new BufferedWriter(fichierEcritureAccess1);
             bwAccess1.write("AuthName \"Zone Securisee\"\n" +
                     "AuthType Basic\n" +
-                    "AuthUserFile \".htpasswd\"\n" +
-                    "Require valid-user");
+                    "AuthUserFile \".htpasswd\"\n");
+
+            lectureHtAccess = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));
+            while ((ligneAgentStuff = lectureHtAccess.readLine()) != null){
+                bwAccess1.write("<FilesMatch \""+ligneAgentStuff+".html\">\n"+      //Ecriture de chaque user dans le htaccess
+                        " Require user "+ligneAgentStuff+"\n"+
+                        "</FilesMatch>\n");
+
+            }
+
             bwAccess1.close();
+
 
             FileWriter fichierEcritureAccess2 = new FileWriter(fichierHtPassword.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
             BufferedWriter bwAccess2 = new BufferedWriter(fichierEcritureAccess2);
@@ -190,20 +197,6 @@ public class Export {
                 int i = 0;
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
                     if (i==3) {
-                     /* MessageDigest md5 = MessageDigest.getInstance("MD5");                            //On prend le hashage MD5
-                        md5.reset();
-                        md5.update(ligneAgentStuff.getBytes());                                           //Notre password se transforme en bytes
-
-                        byte[] chaineByte = md5.digest();                                                //Stockage des bytes dans un array
-                        BigInteger bigInt = new BigInteger(1,chaineByte);                           //passage de bit en bigint
-                        String passwordHash = bigInt.toString(16);                                  //Passage de bigint en string
-
-                        while(passwordHash.length() < 32){                                              //Concatenation de tous les caractères
-                            passwordHash = "0" + passwordHash;
-                        }
-                        bwAccess.write(passwordHash+"\n");
-                        System.out.println(md5.toString());
-                      */
                         String password = ligneAgentStuff;
                         String algorithm = "SHA-1";
 
@@ -222,8 +215,6 @@ public class Export {
                                 }
                                 sb.append(Long.toString(encodedPassword[z] & 0xff, 16));
                             }
-                            System.out.println("Non-Encrypted    : " + password);
-                            System.out.println("Encrypted: " + sb.toString());
                             bwAccess2.write("{SHA}"+sb.toString()+"\n");
                         } catch (Exception e) {
                             e.printStackTrace();
