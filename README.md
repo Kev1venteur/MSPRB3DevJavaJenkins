@@ -1,12 +1,18 @@
 # MSPRB3Dev
 This is the MSPR project of the third year at EPSI Nantes. Project Duration : 20h.
 
+# Important Infos
+The java code is made to work with Apache on a linux server, and so, create all the files in "/var/www/html/msprb3" -- see [The Build Part](README.md#L32)
+
+
 The Java Program : </br>
   &nbsp;&nbsp;&nbsp;&nbsp;0 - Works on multi Threads; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;1 - Read text file; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;2 - Generate HTML from infos in text files; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;3 - Check if export files/folders exist and create them if not; </br>
   &nbsp;&nbsp;&nbsp;&nbsp;4 - Write into files the generated HTML code; </br>
+  &nbsp;&nbsp;&nbsp;&nbsp;4 - Create .htaccess to secure HTML pages with .htpasswd combos; </br>
+  &nbsp;&nbsp;&nbsp;&nbsp;6 - Create .htpasswd from password in text files; </br>
 
 
 ## How to Start
@@ -30,7 +36,9 @@ $ git clone https://github.com/Kev1venteur/MSPRB3Dev.git
 $ cd MSPRB3Dev
 $ mvn clean package
 $ mv target/msprb3-1.0.jar ./msprb3-1.0.jar
-$ java -jar msprb3-1.0.jar
+$ mkdir /var/www/html/msprb3
+$ cp -r website/* /var/www/html/msprb3/
+$ java -Dfile.encoding=UTF8 -Dsun.jnu.encoding=utf-8 -jar msprb3-1.0.jar
 ```
 
 ## Environnement Setup
@@ -51,3 +59,4 @@ Just send a pull-request :trophy:
 :gem: Jenkins Install : https://www.jenkins.io/doc/book/installing/ </br>
 :gem: Maven Install : https://maven.apache.org/install.html </br>
 :gem: How to work with jar files : https://stackoverflow.com/questions/394616/running-jar-file-on-windows </br>
+:gem: Apache Passwords Encryptions : https://httpd.apache.org/docs/2.4/fr/misc/password_encryptions.html </br>
