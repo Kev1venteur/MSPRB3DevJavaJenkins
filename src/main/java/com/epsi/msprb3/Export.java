@@ -197,11 +197,7 @@ public class Export {
                 int i = 0;
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
                     if (i==3) {
-                        MessageDigest digest = MessageDigest.getInstance("SHA-1");
-                        digest.reset();
-                        digest.update(ligneAgentStuff.getBytes(StandardCharsets.UTF_8));
-                        String sha1 = String.format("%040x", new BigInteger(1, digest.digest()));
-                        String encodedString = Base64.getEncoder().encodeToString(sha1.getBytes());
+                        String encodedString = Base64.getEncoder().encodeToString(MessageDigest.getInstance("SHA1").digest(ligneAgentStuff.getBytes(StandardCharsets.UTF_8)));
                         bwAccess2.write("{SHA}"+encodedString+"\n");
                     }
                     i++;
