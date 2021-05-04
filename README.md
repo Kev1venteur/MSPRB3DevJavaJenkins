@@ -2,7 +2,7 @@
 This is the MSPR project of the third year at EPSI Nantes. Project Duration : 20h.
 
 # Important Infos
-The java code is made to work with Apache on a linux server, and so, create all the files in "/var/www/html/msprb3" -- see [The Build Part](README.md#L32)
+The java code is made to work with Apache on a linux server, and so, create all the files in "/var/www/html/msprb3" - see the "How to Build" part.
 
 
 The Java Program : </br>
