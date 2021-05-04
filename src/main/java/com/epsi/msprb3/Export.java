@@ -162,6 +162,7 @@ public class Export {
             String ligneHtAccess;
             BufferedReader lectureAgentStuff;
             String ligneAgentStuff;
+
             File fichierHtAccess = new File("/var/www/html/msprb3/agents/.htaccess");
             if(!fichierHtAccess.exists()){                                                              //Si le fichier n'existe pas, création de ce dernier
                 fichierHtAccess.createNewFile();
@@ -175,7 +176,17 @@ public class Export {
             bwAccess1.write("AuthName \"Zone Securisee\"\n" +
                     "AuthType Basic\n" +
                     "AuthUserFile \".htpasswd\"\n");
+
+            lectureHtAccess = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));
+            while ((ligneAgentStuff = lectureHtAccess.readLine()) != null){
+                bwAccess1.write("<FilesMatch \""+ligneAgentStuff+".html\">\n"+      //Ecriture de chaque user dans le htaccess
+                        " Require user "+ligneAgentStuff+"\n"+
+                        "</FilesMatch>\n");
+
+            }
+
             bwAccess1.close();
+
 
             FileWriter fichierEcritureAccess2 = new FileWriter(fichierHtPassword.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
             BufferedWriter bwAccess2 = new BufferedWriter(fichierEcritureAccess2);
