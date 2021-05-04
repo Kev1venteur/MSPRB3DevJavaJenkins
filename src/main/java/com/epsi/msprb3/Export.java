@@ -175,7 +175,7 @@ public class Export {
             BufferedWriter bwAccess1 = new BufferedWriter(fichierEcritureAccess1);
             bwAccess1.write("AuthName \"Zone Securisee\"\n" +
                     "AuthType Basic\n" +
-                    "AuthUserFile \".htpasswd\"\n");
+                    "AuthUserFile \"/var/www/html/msprb3/agents/.htpasswd\"\n");
 
             lectureHtAccess = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));
             while ((ligneAgentStuff = lectureHtAccess.readLine()) != null){
