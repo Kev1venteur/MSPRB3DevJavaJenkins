@@ -8,7 +8,8 @@ import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 import java.security.*;
-
+import java.math.BigInteger;
+import java.security.MessageDigest;
 
 public class Export {
     public static void genererAccueil() throws IOException {
@@ -124,6 +125,7 @@ public class Export {
                         bw.write("\n");
                         bw.write("<p>Equipements :\n</p>");
                     }                                                                               //Pas d'affichage de la 4eme ligne car c'est le mot de passe
+
                     if (i>4) {                                                                      //Pour la 5eme ligne et plus, c'est le materiel de la personne qui est écrit
                         bw.write("<br>");
                         bw.write("<div class='Materiel'>");
@@ -134,18 +136,27 @@ public class Export {
                     i++;
                     //done
                 }
+
                 lectureAgentStuff.close();
+
                 bw.write("</body>\n"+
                         "<footer>\n MSPR - JAVA © 2021 Copyright\n</footer>\n"+
                         "</html>");
+
                 bw.close();
             }
+
+
+
             System.out.println("Done !");
             lecture.close();
+
         }catch(FileNotFoundException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
             exc.printStackTrace();
         }
+
     }
+
     public static void genererHtAccess() throws IOException {
         //CREATION MDP DANS FICHIER HTPASSWD et Creation du fichier HTACCES
         try{
@@ -175,8 +186,8 @@ public class Export {
                         "</FilesMatch>\n");
 
             }
-            bwAccess1.close();
 
+            bwAccess1.close();
             FileWriter fichierEcritureAccess2 = new FileWriter(fichierHtPassword.getAbsoluteFile(), StandardCharsets.UTF_8);             //Recuperation du chemin du fichier
             BufferedWriter bwAccess2 = new BufferedWriter(fichierEcritureAccess2);
             lectureHtAccess = new BufferedReader(new InputStreamReader(new FileInputStream("website/fiches_agents/staff.txt"), StandardCharsets.UTF_8));
@@ -186,36 +197,19 @@ public class Export {
                 int i = 0;
                 while ((ligneAgentStuff = lectureAgentStuff.readLine()) != null){
                     if (i==3) {
-                        String password = ligneAgentStuff;
-                        String algorithm = "SHA-1";
-                        byte[] plainText = password.getBytes();
-                        try {
-                            MessageDigest md = MessageDigest.getInstance(algorithm);
-                            md.reset();
-                            md.update(plainText);
-
-                            byte[] encodedPassword = md.digest();
-                            StringBuilder sb = new StringBuilder();
-
-                            for (int z = 0; z < encodedPassword.length; z++) {
-                                if ((encodedPassword[z] & 0xff) < 0x10) {
-                                    sb.append("0");
-                                }
-                                sb.append(Long.toString(encodedPassword[z] & 0xff, 16));
-                            }
-                            String encodedString = Base64.getEncoder().encodeToString(sb.toString().getBytes());
-                            bwAccess2.write("{SHA}"+encodedString+"\n");
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        MessageDigest digest = MessageDigest.getInstance("SHA-1");
+                        digest.reset();
+                        digest.update(ligneAgentStuff.getBytes(StandardCharsets.UTF_8));
+                        String sha1 = String.format("%040x", new BigInteger(1, digest.digest()));
+                        String encodedString = Base64.getEncoder().encodeToString(sha1.getBytes());
+                        bwAccess2.write("{SHA}"+encodedString+"\n");
                     }
                     i++;
                     //done
                 }
             }
             bwAccess2.close();
-        }catch(FileNotFoundException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
+        }catch(FileNotFoundException | NoSuchAlgorithmException exc){                                                              //Si il y a une erreur, envoie une erreur différente que de la page index
             exc.printStackTrace();
         }
     }
