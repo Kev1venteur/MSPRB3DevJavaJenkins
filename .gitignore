@@ -24,5 +24,7 @@ hs_err_pid*
 
 *.html
 
+out/*
+
 .htaccess
 .htpasswd
