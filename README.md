@@ -1,6 +1,7 @@
 # MSPRB3Dev
-This is the MSPR project of the third year at EPSI Nantes. Project Duration : 20h.
-Result visible [here](https://jenkins.kevingillet.com/).
+This is the MSPR project of the third year at EPSI Nantes. Project Duration : 20h. </br>
+Result visible [here](https://jenkins.kevingillet.com/). </br>
+Supervision visibe [here](https://stats.uptimerobot.com/nJxNJiG2j2/788037456).
 
 # Important Infos
 The java code is made to work with Apache on a linux server, and so, create all the files in "/var/www/html/msprb3" - see the "How to Build" part.
