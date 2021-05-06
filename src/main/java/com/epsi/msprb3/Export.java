@@ -27,12 +27,12 @@ public class Export {
 
             bufferIndex.write("<!DOCTYPE html>\n " +
                     "<html lang='en'>\n" +
-                    "<head>\n <title>MSPR - JAVA</title>\n" +
+                    "<head>\n <title>GO Securi - JAVA</title>\n" +
                     "<meta charset='utf-8'>\n " +
                     "<link rel='stylesheet' href='/style/accueil.css'>\n" +                       //Ecriture du code HTML
                     " </head>\n " +
                     "<div class='Logo'><img class='Logo' src='/images/LogoGOSecuri.jpg' alt='Logo GOSecuri'></div><br>\n" +
-                    "<div><h1>MSPR - JAVA Accueil</h1></div><br>\n" +
+                    "<div><h1>GO Securi Accueil</h1></div><br>\n" +
                     "<body>\n" +
                     "<div class='List'>\n");
 
@@ -52,7 +52,7 @@ public class Export {
 
             bufferIndex.write("</div>\n" +                                                   //Ecriture de l'HTML (fin)
                     "</body>\n" +
-                    "<footer>\n MSPR - JAVA © 2021 Copyright\n</footer>\n" +
+                    "<footer>\n GO Securi © 2021 Copyright\n</footer>\n" +
                     "</html>");
             bufferIndex.close();                                                                //Fermeture du buffer ouvert au début
 
@@ -137,7 +137,7 @@ public class Export {
                 lectureAgentStuff.close();
 
                 bw.write("</body>\n" +
-                        "<footer>\n MSPR - JAVA © 2021 Copyright\n</footer>\n" +
+                        "<footer>\n GO Securi © 2021 Copyright\n</footer>\n" +
                         "</html>");
                 bw.close();
             }
